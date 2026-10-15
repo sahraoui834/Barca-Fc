@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FC Barcelona — Més que un club</title>
+<meta name="description" content="A tribute to FC Barcelona: history, philosophy, squad, trophies and fan zone.">
+<link rel="icon" type="image/png" href="images/logos/favicon.png">
+<link rel="apple-touch-icon" href="images/logos/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== Design tokens ===== */
+:root{
+  --blue:#004d98; --garnet:#a50044; --gold:#edbb00;
+  --bg:#0a0f1d; --bg2:#101830; --text:#fff; --muted:#b9c3dc;
+  --glass:rgba(255,255,255,.07); --line:rgba(255,255,255,.16);
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --safe-top:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:.01em}
+h2{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;margin-bottom:14px}
+.wrap{width:min(1180px,92%);margin-inline:auto}
+section{padding:96px 0}
+.lead{color:var(--muted);max-width:60ch;font-size:1.08rem}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.btn{display:inline-block;font-weight:600;padding:14px 28px;border-radius:999px;border:2px solid transparent;cursor:pointer;font-family:var(--body);font-size:1rem;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#1a1400;box-shadow:0 8px 28px rgba(237,187,0,.28)}
+.btn-ghost{border-color:var(--line);background:var(--glass);color:#fff}
+.btn-ghost:hover{border-color:var(--gold)}
+
+/* ===== Nav ===== */
+header{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:var(--safe-top);background:rgba(10,15,29,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;font-size:1.55rem;letter-spacing:.04em}
+.crest{width:38px;height:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.links{display:flex;gap:26px;font-weight:500;font-size:.95rem}
+.links a{color:var(--muted);padding:6px 0;border-bottom:2px solid transparent;transition:.2s}
+.links a:hover,.links a.active{color:#fff;border-color:var(--gold)}
+.burger{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer;padding:8px}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(300px,82%);background:var(--bg2);z-index:60;padding:90px 30px 30px;display:flex;flex-direction:column;gap:22px;transform:translateX(105%);transition:transform .35s ease;border-left:1px solid var(--line);font-size:1.15rem;font-weight:500}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:55;opacity:0;pointer-events:none;transition:.3s}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer .close{position:absolute;top:20px;right:22px;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:grid;align-items:center;position:relative;overflow:hidden;padding:130px 0 80px;
+  background:
+   radial-gradient(ellipse at 50% 120%,rgba(237,187,0,.18),transparent 55%),
+   repeating-linear-gradient(90deg,rgba(0,77,152,.85) 0 70px,rgba(165,0,68,.85) 70px 140px),
+   var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,29,.55),rgba(10,15,29,.92) 80%)}
+.pitch{position:absolute;left:50%;bottom:-180px;width:min(900px,120vw);aspect-ratio:2/1;transform:translateX(-50%);border:2px solid rgba(255,255,255,.18);border-radius:50% 50% 0 0/100% 100% 0 0;pointer-events:none}
+.pitch::after{content:"";position:absolute;left:50%;top:0;height:100%;border-left:2px solid rgba(255,255,255,.18)}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(3.4rem,11vw,8.4rem);font-weight:800;text-transform:uppercase;max-width:11ch}
+.hero h1 span{display:block;color:var(--gold)}
+.hero p{margin:22px 0 34px;max-width:52ch;font-size:clamp(1.05rem,2.2vw,1.3rem);color:#e3e9f8}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.est{margin-top:46px;display:flex;gap:30px;flex-wrap:wrap;color:var(--muted);font-size:.95rem}
+.est b{display:block;color:#fff;font-family:var(--display);font-size:1.7rem}
+
+.hero-crest{position:absolute;z-index:2;right:7%;top:52%;transform:translateY(-50%);width:min(380px,32vw);height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.55))}
+@media(max-width:860px){.hero-crest{right:50%;transform:translate(50%,-50%);top:30%;width:60vw;opacity:.16}}
+
+/* ===== Philosophy ===== */
+.philo{background:var(--bg2)}
+.philo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:44px}
+.card{padding:30px;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.card i{font-size:1.7rem;color:var(--gold);margin-bottom:16px}
+.card h3{font-size:1.7rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.98rem}
+
+/* ===== Squad ===== */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 36px}
+.tab{padding:10px 22px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--muted);cursor:pointer;font-family:var(--body);font-weight:600;font-size:.95rem;transition:.2s}
+.tab.on{background:var(--gold);color:#1a1400;border-color:var(--gold)}
+.squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:22px}
+.pc{perspective:1000px;height:340px;cursor:pointer;border:0;background:none;color:inherit;text-align:left;font:inherit}
+.pc.hide{display:none}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.pc:hover .in,.pc.flip .in,.pc:focus-visible .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px;display:flex;flex-direction:column;overflow:hidden}
+.front{background:linear-gradient(160deg,var(--blue),#0a2a5c 60%,var(--garnet));border:1px solid var(--line)}
+.front .no{position:absolute;right:16px;top:2px;font-family:var(--display);font-weight:800;font-size:7.5rem;line-height:1;color:rgba(255,255,255,.14)}
+.front .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.front::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,29,0) 45%,rgba(10,15,29,.88) 100%)}
+.front h3,.front .pos{position:relative;z-index:2}
+.front .no{z-index:1;color:rgba(255,255,255,.2)}
+.avatar{margin:26px auto 0;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:3rem;font-weight:800;background:radial-gradient(circle at 30% 25%,#ffe27a,var(--gold));color:#1a1400;border:4px solid rgba(255,255,255,.85);position:relative}
+.front h3{margin-top:auto;font-size:2rem}
+.pos{color:var(--gold);font-weight:600;font-size:.92rem}
+.back{transform:rotateY(180deg);background:var(--bg2);border:1px solid var(--gold)}
+.back h3{font-size:1.7rem;color:var(--gold);margin-bottom:10px}
+.back p{color:var(--muted);font-size:.93rem;margin-bottom:14px}
+.back dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:auto;font-size:.9rem}
+.back dt{color:var(--muted)}.back dd{font-weight:600}
+
+/* ===== Trophies ===== */
+.trophies{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:44px}
+.tc{padding:28px 22px;text-align:center;border-top:4px solid var(--gold)}
+.chip{width:104px;height:104px;margin:0 auto 6px;border-radius:50%;background:#fff;display:grid;place-items:center;padding:16px}
+.chip img{max-width:100%;max-height:100%;object-fit:contain}
+.chip.ico{background:linear-gradient(145deg,#ffe27a,var(--gold));color:#1a1400;font-size:2.4rem}
+.tc .n{font-family:var(--display);font-size:4.6rem;font-weight:800;line-height:1;margin:10px 0 4px}
+.tc span{color:var(--muted);font-size:.95rem}
+.note{margin-top:22px;color:var(--muted);font-size:.85rem}
+
+/* ===== Poll ===== */
+.poll{max-width:720px;margin:36px auto 0;padding:34px}
+.poll h3{font-size:1.9rem;margin-bottom:20px}
+.opt{display:block;width:100%;position:relative;overflow:hidden;text-align:left;padding:15px 18px;margin-bottom:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;font:inherit;font-weight:500;cursor:pointer;transition:border-color .2s}
+.opt:hover{border-color:var(--gold)}
+.opt .bar{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--blue),var(--garnet));opacity:.75;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.opt .row{position:relative;display:flex;justify-content:space-between;gap:12px}
+.opt.mine{border-color:var(--gold)}
+.pmeta{color:var(--muted);font-size:.9rem;margin-top:8px}
+.center{text-align:center}.center .lead{margin-inline:auto}
+
+/* ===== Footer ===== */
+footer{background:#060a14;border-top:4px solid;border-image:linear-gradient(90deg,var(--blue),var(--garnet)) 1;padding:64px 0 28px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1.4fr;gap:40px}
+footer h4{font-family:var(--display);font-size:1.4rem;margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:8px;color:var(--muted)}
+footer ul a:hover{color:var(--gold)}
+.social{display:flex;gap:12px;margin-top:18px}
+.social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--glass);transition:.2s}
+.social a:hover{background:var(--gold);color:#1a1400}
+.nl{display:flex;gap:10px;flex-wrap:wrap}
+.nl input{flex:1 1 180px;padding:13px 18px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font:inherit}
+.msg{min-height:1.4em;margin-top:10px;font-size:.92rem}
+.msg.ok{color:#6ee7a0}.msg.err{color:#ff8fa8}
+.copy{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+
+/* ===== Music ===== */
+.music{position:fixed;z-index:45;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid var(--line);background:rgba(10,15,29,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font:600 .9rem var(--body);cursor:pointer;transition:.2s}
+.music:hover{border-color:var(--gold)}
+.music.on{background:var(--gold);color:#1a1400;border-color:var(--gold)}
+.music.on i{animation:beat 1s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.25)}}
+
+/* ===== Reveal ===== */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in-view{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .links{display:none}.burger{display:block}
+  .fgrid{grid-template-columns:1fr}
+  section{padding:72px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<header>
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#home" class="logo"><img class="crest" src="images/logos/crest.png" alt="" width="38" height="38">FC Barcelona</a>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#philosophy">History &amp; Philosophy</a>
+      <a href="#squad">Squad</a>
+      <a href="#trophies">Trophy Room</a>
+      <a href="#news">Latest News</a>
+      <a href="#fanzone">Membership / Fan Zone</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+</header>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile menu">
+  <button class="close" id="close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  <a href="#home">Home</a><a href="#philosophy">History &amp; Philosophy</a><a href="#squad">Squad</a>
+  <a href="#trophies">Trophy Room</a><a href="#news">Latest News</a><a href="#fanzone">Membership / Fan Zone</a>
+</aside>
+
+<main>
+<!-- ===== Hero ===== -->
+<section class="hero" id="home">
+  <div class="pitch" aria-hidden="true"></div>
+  <img class="hero-crest" src="images/logos/crest.png" alt="FC Barcelona crest" width="380" height="380">
+  <div class="wrap">
+    <h1>FC Barcelona <span>Més que un club</span></h1>
+    <p>Born in Catalonia in 1899, carried by its members, and known around the world for football played with courage and beauty.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="#squad">Explore Squad</a>
+      <a class="btn btn-ghost" href="#philosophy">Discover History</a>
+    </div>
+    <div class="est">
+      <div><b>1899</b>Founded</div>
+      <div><b>Camp Nou</b>Home stadium</div>
+      <div><b>Culers</b>Owned by its members</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Philosophy ===== -->
+<section class="philo" id="philosophy">
+  <div class="wrap">
+    <div class="rv">
+      <h2>History &amp; philosophy</h2>
+      <p class="lead">Swiss-born Joan Gamper founded the club on 29 November 1899. Since then Barça has stood for Catalan identity, solidarity and a way of playing that people recognise within seconds.</p>
+    </div>
+    <div class="philo-grid">
+      <article class="card glass rv"><i class="fa-solid fa-futbol"></i><h3>Tiki-taka</h3><p>Short passes, constant movement and control of the ball. Shaped by Johan Cruyff and perfected under Pep Guardiola, it treats possession as the best defence.</p></article>
+      <article class="card glass rv"><i class="fa-solid fa-seedling"></i><h3>La Masia</h3><p>The academy that raised Xavi, Iniesta, Messi, Busquets and Pedri teaches technique and values together, and keeps feeding the first team.</p></article>
+      <article class="card glass rv"><i class="fa-solid fa-people-group"></i><h3>Més que un club</h3><p>Barça belongs to its socis, who elect the president. The club has long carried Catalan culture and social causes, from its shirt to its charity work.</p></article>
+      <article class="card glass rv"><i class="fa-solid fa-heart"></i><h3>Values</h3><p>Humility, effort, ambition, teamwork and respect. They are taught from the youngest teams up.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Squad ===== -->
+<section id="squad">
+  <div class="wrap">
+    <div class="rv">
+      <h2>The squad</h2>
+      <p class="lead">Hover, tap or focus a card to turn it over. Filter by position.</p>
+    </div>
+    <div class="tabs rv" role="tablist" aria-label="Filter players">
+      <button class="tab on" data-f="all" role="tab" aria-selected="true">All</button>
+      <button class="tab" data-f="GK" role="tab" aria-selected="false">Goalkeepers</button>
+      <button class="tab" data-f="MID" role="tab" aria-selected="false">Midfielders</button>
+      <button class="tab" data-f="FWD" role="tab" aria-selected="false">Forwards</button>
+    </div>
+    <div class="squad" id="squadGrid"></div>
+  </div>
+</section>
+
+<!-- ===== Trophies ===== -->
+<section class="trophies" id="trophies">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Trophy room</h2>
+      <p class="lead">Major honours won by the club, counted as they stood after the 2024–25 season.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tc glass rv"><div class="chip"><img src="images/trophies/champions-league.webp" alt="" loading="lazy"></div><div class="n" data-t="5">0</div><span>UEFA Champions League</span></div>
+      <div class="tc glass rv"><div class="chip"><img src="images/trophies/laliga.webp" alt="" loading="lazy"></div><div class="n" data-t="28">0</div><span>La Liga</span></div>
+      <div class="tc glass rv"><div class="chip"><img src="images/trophies/copa-del-rey.webp" alt="" loading="lazy"></div><div class="n" data-t="32">0</div><span>Copa del Rey</span></div>
+      <div class="tc glass rv"><div class="chip ico"><i class="fa-solid fa-trophy"></i></div><div class="n" data-t="4">0</div><span>Cup Winners' Cup</span></div>
+      <div class="tc glass rv"><div class="chip"><img src="images/trophies/super-cup.webp" alt="" loading="lazy"></div><div class="n" data-t="5">0</div><span>UEFA Super Cup</span></div>
+      <div class="tc glass rv"><div class="chip"><img src="images/trophies/club-world-cup.webp" alt="" loading="lazy"></div><div class="n" data-t="3">0</div><span>FIFA Club World Cup</span></div>
+    </div>
+    <p class="note">Totals change every season. Check the club's official site for the latest numbers.</p>
+  </div>
+</section>
+
+<!-- ===== News ===== -->
+<section class="philo" id="news">
+  <div class="wrap">
+    <div class="rv"><h2>Latest news</h2><p class="lead">Sample headlines for this page. Replace them with your own feed.</p></div>
+    <div class="philo-grid">
+      <article class="card glass rv"><h3>Matchday preview</h3><p>What to expect from the next home fixture, from team selection to the tactical plan.</p></article>
+      <article class="card glass rv"><h3>La Masia graduates</h3><p>Young players from the academy keep earning minutes and building the next generation.</p></article>
+      <article class="card glass rv"><h3>Socis update</h3><p>News from the club's members on stadium works and community projects.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Fan zone ===== -->
+<section id="fanzone">
+  <div class="wrap center">
+    <div class="rv">
+      <h2>Fan zone</h2>
+      <p class="lead">Vote once and see how the Culers split. Results are stored only in this browser tab.</p>
+    </div>
+    <div class="poll glass rv" id="poll">
+      <h3>Who is your Barça legend?</h3>
+      <div id="opts"></div>
+      <p class="pmeta" id="pmeta">Pick a name to see the results.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a href="#home" class="logo"><img class="crest" src="images/logos/crest.png" alt="" width="38" height="38">FC Barcelona</a>
+        <p style="color:var(--muted);margin-top:14px;max-width:34ch">Més que un club. A fan-made tribute to the Blaugrana.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="#philosophy">History &amp; Philosophy</a></li>
+          <li><a href="#squad">Squad</a></li>
+          <li><a href="#trophies">Trophy Room</a></li>
+          <li><a href="#fanzone">Fan Zone</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Match news in your inbox</h4>
+        <form class="nl" id="nl" novalidate>
+          <input type="email" id="email" placeholder="you@example.com" aria-label="Email address" required>
+          <button class="btn btn-gold" type="submit">Subscribe</button>
+        </form>
+        <p class="msg" id="msg" role="status"></p>
+      </div>
+    </div>
+    <p class="copy">&copy; <span id="yr"></span> FC Barcelona fan tribute. Unofficial. All club names and marks belong to their owners.</p>
+  </div>
+</footer>
+
+<audio id="song" src="audio/visca-barca.mp3" loop preload="none"></audio>
+<button class="music" id="music" aria-pressed="false" aria-label="Play club song"><i class="fa-solid fa-music"></i><span id="mlabel">Play club song</span></button>
+
+<script>
+/* ===== Data ===== */
+const players=[
+ {n:'Marc-André ter Stegen',s:'Ter Stegen',no:1,p:'Goalkeeper',g:'GK',i:'MT',img:'',b:'A sweeper-keeper who starts attacks with his feet and has been a pillar of the side for years.',age:'Germany',foot:'Right'},
+ {n:'Pedri',s:'Pedri',no:8,p:'Central midfielder',g:'MID',i:'P',img:'images/players/pedri.webp',pos:'center top',b:'A La Masia-style playmaker who reads the game early and rarely loses the ball.',age:'Spain',foot:'Right'},
+ {n:'Frenkie de Jong',s:'De Jong',no:21,p:'Central midfielder',g:'MID',i:'FJ',img:'images/players/de-jong.webp',pos:'center 12%',b:'Carries the ball out of pressure and links defence to attack with long, driving runs.',age:'Netherlands',foot:'Right'},
+ {n:'Gavi',s:'Gavi',no:6,p:'Midfielder',g:'MID',i:'G',img:'images/players/gavi.webp',pos:'center 18%',b:'Relentless in the press and fearless on the ball. His energy sets the tempo.',age:'Spain',foot:'Right'},
+ {n:'Lamine Yamal',s:'Yamal',no:10,p:'Right winger',g:'FWD',i:'LY',img:'images/players/yamal.webp',pos:'center 20%',b:'A La Masia product who broke through as a teenager with dribbling and an eye for the final pass.',age:'Spain',foot:'Left'},
+ {n:'Robert Lewandowski',s:'Lewandowski',no:9,p:'Striker',g:'FWD',i:'RL',img:'images/players/lewandowski.webp',pos:'center 15%',b:'A complete number nine, lethal in the box and clever with movement and finishing.',age:'Poland',foot:'Right'}
+];
+const grid=document.getElementById('squadGrid');
+grid.innerHTML=players.map(x=>`
+ <button class="pc" data-g="${x.g}" aria-label="${x.n}, number ${x.no}. Press to turn card.">
+  <div class="in">
+   <div class="face front"><span class="no">${x.no}</span>${x.img?`<img class="ph" src="${x.img}" alt="${x.n}" loading="lazy" style="object-position:${x.pos}">`:`<div class="avatar">${x.i}</div>`}<h3>${x.s}</h3><div class="pos">${x.p}</div></div>
+   <div class="face back"><h3>${x.n}</h3><p>${x.b}</p><dl><dt>Number</dt><dd>${x.no}</dd><dt>Position</dt><dd>${x.p}</dd><dt>Nation</dt><dd>${x.age}</dd><dt>Foot</dt><dd>${x.foot}</dd></dl></div>
+  </div>
+ </button>`).join('');
+grid.addEventListener('click',e=>{const c=e.target.closest('.pc');if(c)c.classList.toggle('flip')});
+
+/* ===== Squad filter ===== */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(o=>{o.classList.remove('on');o.setAttribute('aria-selected','false')});
+  t.classList.add('on');t.setAttribute('aria-selected','true');
+  const f=t.dataset.f;
+  grid.querySelectorAll('.pc').forEach(c=>c.classList.toggle('hide',f!=='all'&&c.dataset.g!==f));
+}));
+
+/* ===== Mobile menu ===== */
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim'),burger=document.getElementById('burger');
+function menu(open){drawer.classList.toggle('open',open);scrim.classList.toggle('show',open);burger.setAttribute('aria-expanded',open)}
+burger.onclick=()=>menu(true);document.getElementById('close').onclick=()=>menu(false);scrim.onclick=()=>menu(false);
+drawer.querySelectorAll('a').forEach(a=>a.onclick=()=>menu(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
+
+/* ===== Scroll reveal + counters ===== */
+function count(el){
+  const end=+el.dataset.t;let v=0;const step=Math.max(1,Math.ceil(end/40));
+  const id=setInterval(()=>{v=Math.min(end,v+step);el.textContent=v;if(v>=end)clearInterval(id)},38);
+}
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return;
+  en.target.classList.add('in-view');
+  const n=en.target.querySelector('[data-t]');if(n)count(n);
+  io.unobserve(en.target);
+}),{threshold:.2});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ===== Active nav link ===== */
+const secs=[...document.querySelectorAll('main section[id]')],navA=document.querySelectorAll('.links a');
+new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting)navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'}).observe&&secs.forEach(s=>{
+  new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting)navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+s.id));
+  }),{rootMargin:'-45% 0px -50% 0px'}).observe(s);
+});
+
+/* ===== Fan poll ===== */
+const legends=[['Lionel Messi',420],['Xavi Hernández',210],['Andrés Iniesta',240],['Johan Cruyff',130]];
+const votes=legends.map(l=>l[1]);let voted=-1;
+const opts=document.getElementById('opts'),pmeta=document.getElementById('pmeta');
+opts.innerHTML=legends.map((l,i)=>`<button class="opt" data-i="${i}"><span class="bar"></span><span class="row"><span>${l[0]}</span><span class="pct"></span></span></button>`).join('');
+opts.addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b||voted>-1)return;
+  voted=+b.dataset.i;votes[voted]++;
+  const tot=votes.reduce((a,c)=>a+c,0);
+  opts.querySelectorAll('.opt').forEach((o,i)=>{
+    const p=Math.round(votes[i]/tot*100);
+    o.querySelector('.bar').style.width=p+'%';o.querySelector('.pct').textContent=p+'%';
+    o.classList.toggle('mine',i===voted);
+  });
+  pmeta.textContent='Thanks for voting. '+tot.toLocaleString()+' votes counted (starting figures are sample data).';
+});
+
+/* ===== Newsletter ===== */
+const msg=document.getElementById('msg');
+document.getElementById('nl').addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=document.getElementById('email').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){msg.className='msg err';msg.textContent='Enter a valid email address, like name@example.com.';return}
+  msg.className='msg ok';msg.textContent='You are subscribed. Visca el Barça!';e.target.reset();
+});
+const song=document.getElementById('song'),mb=document.getElementById('music'),ml=document.getElementById('mlabel');
+song.volume=.5;
+mb.addEventListener('click',()=>{
+  if(song.paused){
+    song.play().then(()=>{mb.classList.add('on');mb.setAttribute('aria-pressed','true');mb.setAttribute('aria-label','Pause club song');ml.textContent='Pause song'})
+      .catch(()=>{ml.textContent='Audio file not found'});
+  }else{song.pause();mb.classList.remove('on');mb.setAttribute('aria-pressed','false');mb.setAttribute('aria-label','Play club song');ml.textContent='Play club song'}
+});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
